@@ -9,24 +9,31 @@ export const routes = [
     component: Layout,
     redirect: 'index',
     children: [
-      
+      {
+        path: '/index',
+        component: () => import('@/views/index'),
+        name: 'Index',
+        meta: { title: '首页', icon: 'dashboard', affix: true }
+      },
     ]
   },
+ 
   {
-    path: '/index',
-    component: () => import('@/views/index'),
-    name: 'Index',
-    meta: { title: '首页', icon: 'dashboard', affix: true }
-  },
-  {
-    path:"/handsontable",
+    path:"",
     name:"handsontable",
-    component:()=>import('@/views/handsontable/index')
+    component:Layout,
+    children:[
+      {
+        path:"/handsontable",
+        name:"handsontable",
+        component:()=>import('@/views/handsontable/index'),
+      }
+    ]
   },
   {
     path:'/wordToHtmlIndex',
     name:'wordToHtmlIndex',
-    component:()=>import('@/views/wordToHtml/index'),
+    component:Layout,
     children:[
       {
         path:"previewWord",
