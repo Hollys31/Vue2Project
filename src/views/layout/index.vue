@@ -4,7 +4,7 @@
       <el-scrollbar class="scrollbar">
         <div class="menu-wraper">
           <el-menu
-            default-active="2"
+            default-active="1-1"
             class="el-menu-vertical-demo"
             @open="handleOpen"
             @close="handleClose"
@@ -14,7 +14,7 @@
           >
             <el-submenu index="1">
               <template slot="title">
-                <i class="el-icon-location"></i>
+                <i class="el-icon-folder-opened"></i>
                 <span>File转内容</span>
               </template>
               <el-menu-item index="1-1"
@@ -35,22 +35,22 @@
             </el-submenu>
             <el-submenu index="2">
               <template slot="title">
-                <i class="el-icon-location"></i>
+                <i class="el-icon-time"></i>
                 <span>时间</span>
               </template>
               <el-menu-item index="2-1"
-                ><router-link :to="{ name: 'handsontable' }"
+                ><router-link :to="{ name: 'time' }"
                   >时间格式转换</router-link
                 ></el-menu-item
               >
 
               <el-menu-item index="2-2"
-                ><router-link :to="{ name: 'handsontable' }"
-                  >时间大小判断</router-link
+                ><router-link :to="{ name: 'datePicker' }"
+                  >日期范围格式</router-link
                 ></el-menu-item
               >
             </el-submenu>
-            <el-menu-item index="3" disabled>
+            <el-menu-item index="3">
               <i class="el-icon-document"></i>
               <span slot="title">导航三</span>
             </el-menu-item>
@@ -101,6 +101,9 @@ export default {
     color: #fff;
     font-size: 14px;
     display: block;
+  }
+  .el-menu-item.is-active a{
+    color: #1989fa;
   }
 }
 .scrollbar {

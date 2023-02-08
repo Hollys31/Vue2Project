@@ -20,7 +20,6 @@ export const routes = [
  
   {
     path:"",
-    name:"handsontable",
     component:Layout,
     children:[
       {
@@ -30,6 +29,7 @@ export const routes = [
       }
     ]
   },
+  
   {
     path:'/wordToHtmlIndex',
     name:'wordToHtmlIndex',
@@ -47,7 +47,22 @@ export const routes = [
       }
     ]
   },
-      
+  {
+    path:"",
+    component:Layout,
+    children:[
+      {
+        path:"/time",
+        name:"time",
+        component:()=>import('@/views/time/index'),
+      },
+      {
+        path:"/datePicker",
+        name:"datePicker",
+        component:()=>import('@/views/time/datePicker'),
+      }
+    ]
+  },  
 ]
 
 

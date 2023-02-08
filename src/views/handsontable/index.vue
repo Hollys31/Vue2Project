@@ -50,7 +50,7 @@
           maxCols: 20,
           rowHeaders: true,//行表頭，可使布爾值（行序號），可使字符串（左側行表頭相同顯示內容，能夠解析html），也能夠是數組（左側行表頭單獨顯示內容）。
         
-          colHeaders:   [ '選擇','題目', 'A選項', 'B選項', 'C選項', 'D選項','答案',],//自定義列表頭or 布爾值
+          colHeaders:   [ '选择','题目', 'A选项', 'B选项', 'C选项', 'D选项','答案',],//自定義列表頭or 布爾值
           minSpareCols: 2, //列留白
         
           minSpareRows: 2,//行留白
@@ -79,22 +79,22 @@
                   name: '刪除列',
                 },
                 "make_read_only": {
-                  name: '只讀',
+                  name: '只读',
                 },
                 "borders":{
-                  name:'表格線'
+                  name:'表格线'
                 },
                 "copy":{
-                  name:'複製'
+                  name:'复制'
                 },
                 "cut":{
                   name:'剪切'
                 },
                 "commentsAddEdit": {
-                  name: '添加備註',
+                  name: '添加备注',
                 },
                 "commentsRemove": {
-                  name: '取消備註',
+                  name: '取消备注',
                 },
                 "freeze_column": {
                   name: '固定列',
