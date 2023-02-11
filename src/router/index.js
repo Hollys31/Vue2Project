@@ -17,7 +17,17 @@ export const routes = [
       },
     ]
   },
- 
+  {
+    path:"",
+    component:Layout,
+    children:[
+      {
+        path:"/photoSphereViewer",
+        name:"photoSphereViewer",
+        component:()=>import('@/views/photoSphereViewer/index'),
+      }
+    ]
+  },
   {
     path:"",
     component:Layout,
