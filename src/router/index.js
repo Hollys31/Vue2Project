@@ -25,6 +25,11 @@ export const routes = [
         path:"/photoSphereViewer",
         name:"photoSphereViewer",
         component:()=>import('@/views/photoSphereViewer/index'),
+      },
+      {
+        path:"/krpano",
+        name:"krpano",
+        component:()=>import('@/views/krpano/index'),
       }
     ]
   },

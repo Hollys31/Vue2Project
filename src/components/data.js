@@ -51,6 +51,7 @@ export const photos = [{
         options: {
             caption: '图一',
         },
+        markers:markers
     },
     {
         id: 'sphere-test',
@@ -60,6 +61,7 @@ export const photos = [{
         options: {
             caption: '图二',
         },
+        markers:[]
     },
     {
         id: 'key-biscayne',
@@ -69,5 +71,20 @@ export const photos = [{
         options: {
             caption: '图三',
         },
+        markers:[ {
+            // polyline marker
+            id: 'polyline',
+            polylinePixels: [
+                [2478, 1635], [2184, 1747], [1674, 1953], [1166, 1852],
+                [709, 1669], [301, 1519], [94, 1399], [34, 1356],
+            ],
+            svgStyle: {
+                stroke: 'rgba(140, 190, 10, 0.8)',
+                strokeLinecap: 'round',
+                strokeLinejoin: 'round',
+                strokeWidth: '10px',
+            },
+            tooltip: 'A dynamic polyline marker',
+        },]
     },
 ]

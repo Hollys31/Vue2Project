@@ -1,21 +1,47 @@
 <template>
   <div class="">
-      <photoSphereViewer/>
+    <photoSphereViewer
+    style="width: 80vw; height: 90vh"
+      ref="viewer"
+      :imgList="photoList"
+      @selectMarker="selectMarker"
+    />
   </div>
 </template>
 
 <script>
-import photoSphereViewer from '@/components/PhotoSphereViewer.vue';
+import photoSphereViewer from "@/components/PhotoSphereViewer.vue";
+import { markers, photos } from "@/components/data.js";
 export default {
   props: [],
-  components: {photoSphereViewer},
+  components: { photoSphereViewer },
   data() {
-   return {}
+    return {
+      photoList: photos,
+    };
   },
   created() {},
   mounted() {},
-  methods: {},
-}
+  methods: {
+    selectMarker(marker) {
+      console.log("here page");
+      console.log(marker);
+      const myViewer = this.$refs.viewer;
+      if (marker.id == "new-marker1") {
+        myViewer.updateIndex(1);
+      }
+      if (marker.id == "new-marker2") {
+        myViewer.updateIndex(2);
+      }
+      if (marker.id == "new-marker3") {
+        myViewer.updateMarker(marker.id, require("./../../assets/bao.png"));
+       
+      } else {
+        myViewer.handelChangeViewer();
+      }
+    },
+  },
+};
 </script>
 <style lang="scss" scoped>
 </style>

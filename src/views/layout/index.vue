@@ -50,12 +50,22 @@
                 ></el-menu-item
               >
             </el-submenu>
-            <el-menu-item index="3">
-              <router-link :to="{ name: 'photoSphereViewer' }">
-              <i class="el-icon-document"></i>
-             全景图
-              </router-link>
-            </el-menu-item>
+            <el-submenu index="3">
+              <template slot="title">
+                <i class="el-icon-document"></i>
+                <span>全景图</span>
+              </template>
+              <el-menu-item index="3-1"
+                ><router-link :to="{ name: 'photoSphereViewer' }"
+                  >photo-sphere-viewer</router-link
+                ></el-menu-item
+              >
+
+              <el-menu-item index="3-2"
+                ><router-link :to="{ name: 'krpano' }"
+                  >krpano</router-link
+                ></el-menu-item>
+            </el-submenu>
             <el-menu-item index="4">
               <i class="el-icon-setting"></i>
               <span slot="title">导航四</span>
