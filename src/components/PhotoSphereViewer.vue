@@ -1,11 +1,5 @@
 <template>
-  <div id="viewer">
-    <!-- <div class="gallery-wrap">
-      <ul>
-        <li></li>
-      </ul>
-    </div> -->
-  </div>
+  <div id="viewer"></div>
 </template>
 
 <script>
@@ -69,6 +63,10 @@ export default {
         loadingImg: require("../assets/loader.gif"),
         touchmoveTwoFingers: true,
         mousewheelCtrlKey: false,
+        defaultPitch: _this.animatedValues.pitch.start,
+        defaultYaw: _this.animatedValues.yaw.start,
+        defaultZoomLvl: _this.animatedValues.zoom.start,
+        fisheye: _this.animatedValues.fisheye.start,
         navbar: [
           "autorotate",
           "zoom",
@@ -121,7 +119,25 @@ export default {
     },
     handleViewerReady() {
       this.markersPlugin.setMarkers(this.imgList[this.currIndex].markers); //设置标签
+      this.enteraAimation();
       this.showInitMarker();
+    },
+    enteraAimation() {
+      const _this = this;
+      _this.autorotatePlugin.stop();
+      this.viewer
+        .animate({
+          yaw: Math.PI / 2,
+          pitch: "20deg",
+          zoom: 50,
+          speed: 1000,
+        })
+        .then(() => {
+          _this.viewer.setOption('fisheye',  _this.animatedValues.fisheye.end);
+           _this.viewer.rotate({ yaw: _this.animatedValues.yaw.end, pitch: _this.animatedValues.pitch.end });
+          _this.viewer.zoom(_this.animatedValues.zoom.end);
+          _this.autorotatePlugin.start();
+        });
     },
     showInitMarker() {
       const _this = this;
@@ -133,7 +149,7 @@ export default {
         })
         .then(() => {
           _this.markersPlugin.showMarkerTooltip("new-marker1");
-          _this.autorotatePlugin.start();
+         /*  _this.autorotatePlugin.start(); */
         });
     },
     //清除标记
@@ -183,7 +199,7 @@ export default {
           });
           flag = true;
         } else {
-          if (element&&element.className == "psv-gallery-item-thumb") {
+          if (element && element.className == "psv-gallery-item-thumb") {
             const eleId =
               element.parentElement.parentElement.dataset.psvGalleryItem;
             _sindex = _this.imgList.findIndex((data) => {
