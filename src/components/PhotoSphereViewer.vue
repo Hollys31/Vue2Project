@@ -183,7 +183,7 @@ export default {
           });
           flag = true;
         } else {
-          if (element.className == "psv-gallery-item-thumb") {
+          if (element&&element.className == "psv-gallery-item-thumb") {
             const eleId =
               element.parentElement.parentElement.dataset.psvGalleryItem;
             _sindex = _this.imgList.findIndex((data) => {
@@ -203,7 +203,7 @@ export default {
         }
       });
     },
-    //图库列表当前active
+    //图库列表当前选中active更新
     handelGalleryActive() {
       const galleryBox = document.getElementsByClassName(
         "psv-gallery-container"
