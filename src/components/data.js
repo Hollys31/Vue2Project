@@ -10,6 +10,12 @@ export const markers = [{
             width: 50,
             height: 50
         },
+        tooltip: {
+            content: "go ahead",
+            className: 'custom-tooltip',
+            position: 'top',
+            trigger: 'chan',
+        },
     },
     {
         id: 'new-marker2',
@@ -42,12 +48,27 @@ export const markers = [{
         },
         anchor: 'Holly',
     },
+    {
+        // polyline marker
+        id: 'polyline',
+        polylinePixels: [
+            [2478, 1635], [2184, 1747], [1674, 1953], [1166, 1852],
+            [709, 1669], [301, 1519], [94, 1399], [34, 1356],
+        ],
+        svgStyle: {
+            stroke: 'rgba(140, 190, 10, 0.8)',
+            strokeLinecap: 'round',
+            strokeLinejoin: 'round',
+            strokeWidth: '10px',
+        },
+        tooltip: 'A dynamic polyline marker',
+    },
 ];
 /**全景图片列表**/
 export const photos = [{
         id: 'sphere',
-        panorama:require('./../assets/1.jpg'),
-        thumbnail: require('./../assets/1.jpg'),
+        panorama:require('./../assets/3.jpg'),
+        thumbnail: require('./../assets/3.jpg'),
         options: {
             caption: '图一',
         },
@@ -61,30 +82,27 @@ export const photos = [{
         options: {
             caption: '图二',
         },
-        markers:[]
+        markers:[{
+            id: 'new-marker21',
+            position: {
+                yaw: '-27deg',
+                pitch: '-6deg'
+            },
+            image: require('./../assets/arrow.gif'),
+            size: {
+                width: 50,
+                height: 50
+            },
+        },]
     },
     {
         id: 'key-biscayne',
-        panorama: require('./../assets/3.jpg'),
-        thumbnail: require('./../assets/3.jpg'),
+        panorama: require('./../assets/1.jpg'),
+        thumbnail: require('./../assets/1.jpg'),
         name: 'Key Biscayne',
         options: {
             caption: '图三',
         },
-        markers:[ {
-            // polyline marker
-            id: 'polyline',
-            polylinePixels: [
-                [2478, 1635], [2184, 1747], [1674, 1953], [1166, 1852],
-                [709, 1669], [301, 1519], [94, 1399], [34, 1356],
-            ],
-            svgStyle: {
-                stroke: 'rgba(140, 190, 10, 0.8)',
-                strokeLinecap: 'round',
-                strokeLinejoin: 'round',
-                strokeWidth: '10px',
-            },
-            tooltip: 'A dynamic polyline marker',
-        },]
+        markers:[ ]
     },
 ]
