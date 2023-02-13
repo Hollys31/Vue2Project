@@ -120,12 +120,11 @@ export default {
       });
     },
     handleViewerReady() {
-    
       this.markersPlugin.setMarkers(this.imgList[this.currIndex].markers); //设置标签
       this.showInitMarker();
     },
-    showInitMarker(){
-        const _this = this;
+    showInitMarker() {
+      const _this = this;
       this.viewer
         .animate({
           yaw: "-27deg",
@@ -162,44 +161,77 @@ export default {
     //标记悬停事件
     handleHoverMarker() {
       this.markersPlugin.addEventListener("enter-marker", ({ marker }) => {
-        console.log("enter");
+        /*  console.log("enter"); */
       });
     },
     handleLeaveMarker() {
       this.markersPlugin.addEventListener("leave-marker", ({ marker }) => {
-        console.log("leave");
+        /* console.log("leave"); */
       });
     },
     //gallery图库列表切换
     handleGalleryChange() {
       const _this = this;
+      let _sindex = "";
       document.addEventListener("click", function (e) {
         var element = document.elementFromPoint(e.clientX, e.clientY);
+        let flag = false;
         if (element && element.dataset && element.dataset.psvGalleryItem) {
           const id = element.dataset.psvGalleryItem;
-          const _sindex = _this.imgList.findIndex((data) => {
+          _sindex = _this.imgList.findIndex((data) => {
             return data.id == id;
           });
+          flag = true;
+        } else {
+          if (element.className == "psv-gallery-item-thumb") {
+            const eleId =
+              element.parentElement.parentElement.dataset.psvGalleryItem;
+            _sindex = _this.imgList.findIndex((data) => {
+              return data.id == eleId;
+            });
+            flag = true;
+          }
+        }
+        if (flag) {
           if (_this.currIndex == _sindex) {
-            console.log("点击未切换");
+            console.log("点击了未切换");
           } else {
             _this.currIndex = _sindex;
             _this.panoramaUrl = _this.imgList[_sindex].panorama;
-            _this.handelChangeViewer();
+            _this.handelChangeViewer("gallery");
           }
         }
       });
     },
-    //viewer 切换场景
-    handelChangeViewer() {
+    //图库列表当前active
+    handelGalleryActive() {
+      const galleryBox = document.getElementsByClassName(
+        "psv-gallery-container"
+      )[0];
+      const galleryItemEle =
+        document.getElementsByClassName("psv-gallery-item")[this.currIndex];
+      galleryBox.childNodes.forEach((item) => {
+        item.className = "psv-gallery-item";
+      });
+      galleryItemEle.classList.add("psv-gallery-item--active");
+    },
+    /***
+     * viewer 切换场景
+     * */
+
+    handelChangeViewer(type) {
       const _this = this;
       if (_this.viewer) {
         _this.clearMarker();
+        _this.handelGalleryActive();
         _this.viewer.setPanorama(_this.panoramaUrl).then(() => {
           _this.markersPlugin.setMarkers(
             _this.imgList[_this.currIndex].markers
           );
         });
+        if (type != "gallery") {
+          this.handelGalleryActive();
+        }
       }
     },
     //viewer点击事件监听
