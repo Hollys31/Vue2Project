@@ -3,13 +3,14 @@
 </template>
 
 <script>
-import { Viewer } from "@photo-sphere-viewer/core";
+import { Viewer,utils } from "@photo-sphere-viewer/core";
 import { MarkersPlugin } from "@photo-sphere-viewer/markers-plugin";
 import { GalleryPlugin } from "@photo-sphere-viewer/gallery-plugin";
 import { AutorotatePlugin } from "@photo-sphere-viewer/autorotate-plugin";
 import "@photo-sphere-viewer/core/index.css";
 import "@photo-sphere-viewer/markers-plugin/index.css";
 import "@photo-sphere-viewer/gallery-plugin/index.css";
+
 export default {
   props: {
     hasAnimate: {
@@ -118,39 +119,30 @@ export default {
       });
     },
     handleViewerReady() {
-      this.markersPlugin.setMarkers(this.imgList[this.currIndex].markers); //设置标签
       this.enteraAimation();
+      this.markersPlugin.setMarkers(this.imgList[this.currIndex].markers); //设置标签
       this.showInitMarker();
     },
     enteraAimation() {
       const _this = this;
-      _this.autorotatePlugin.stop();
-      this.viewer
-        .animate({
-          yaw: Math.PI / 2,
-          pitch: "20deg",
-          zoom: 50,
-          speed: 1000,
-        })
-        .then(() => {
-          _this.viewer.setOption('fisheye',  _this.animatedValues.fisheye.end);
-           _this.viewer.rotate({ yaw: _this.animatedValues.yaw.end, pitch: _this.animatedValues.pitch.end });
-          _this.viewer.zoom(_this.animatedValues.zoom.end);
-          _this.autorotatePlugin.start();
-        });
+        _this.autorotatePlugin.stop();
+        new utils.Animation({
+        properties: _this.animatedValues,
+        duration: 2500,
+        easing: 'inOutQuad',
+        onTick: (properties) => {
+            _this.viewer.setOption('fisheye', properties.fisheye);
+            _this.viewer.rotate({ yaw: properties.yaw, pitch: properties.pitch });
+            _this.viewer.zoom(properties.zoom);
+        },
+    }).then(() => {
+         _this.autorotatePlugin.start();
+    }); 
     },
     showInitMarker() {
       const _this = this;
-      this.viewer
-        .animate({
-          yaw: "-27deg",
-          pitch: "-6deg",
-          speed: 100,
-        })
-        .then(() => {
-          _this.markersPlugin.showMarkerTooltip("new-marker1");
-         /*  _this.autorotatePlugin.start(); */
-        });
+      _this.markersPlugin.showMarkerTooltip("new-marker1");
+     /*  _this.autorotatePlugin.start(); */
     },
     //清除标记
     clearMarker() {
