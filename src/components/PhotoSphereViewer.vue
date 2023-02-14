@@ -95,8 +95,8 @@ export default {
             AutorotatePlugin,
             {
               autostartDelay: null,
-              /*   autorotatePitch: _this.animatedValues.pitch.end,
-              autostartOnIdle: false, */
+              autorotatePitch: _this.animatedValues.pitch.end,
+              autostartOnIdle: false,
               autorotateSpeed: "1rpm",
             },
           ],
